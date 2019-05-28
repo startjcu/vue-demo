@@ -18,6 +18,15 @@
         content: 'hello world'
       }
     })
+
+    setTimeout(() => {
+      vm.$data.content = 'bye world'
+    }, 2000);
+
+    setTimeout(() => {
+      //Object.defineProperty将data的属性挂载到了vm上
+      vm.content = 'world coming'
+    }, 4000);
   </script>
 </body>
 

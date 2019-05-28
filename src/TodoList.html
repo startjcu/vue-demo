@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>todo list</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <input autoFocus v-model="inputValue" @keyDown="handleKeyDown">
+    <button v-on:click="handleBtnClick">submit</button>
+    <ul>
+      <li v-for="(item,index) of list" v-on:click="handleItemClick(index)">{{item}}</li>
+    </ul>
+  </div>
+  <script>
+    /**MVVM
+     * M层：model-Plain Javascript Object
+     * V层：view-DOM试图层
+     * VM层：vue框架
+     * 前端组件化：组件就是页面上的一个区域
+     */
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        inputValue: '',
+        list: []
+      },
+      methods: {
+        handleBtnClick: function () {
+          this.list.push(this.inputValue)
+          this.inputValue = ''
+        },
+        handleItemClick: function (index) {
+          this.list.splice(index, 1)
+        },
+        handleKeyDown: function (e) {
+          if (e.keyCode === 13)
+            this.handleBtnClick()
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

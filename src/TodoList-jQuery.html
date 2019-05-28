@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>todo list by jQuery</title>
+  <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <input id="input">
+    <button id="btn">submit</button>
+    <ul id="list"></ul>
+  </div>
+  <script>
+    /**MVP框架
+     * M：model
+     * V：view
+     * P：present控制层
+     */
+    function Page() {
+
+    }
+
+    $.extend(Page.prototype, {
+      init: function () {
+        this.bindEvents()
+      },
+      bindEvents: function () {
+        var btn = $('#btn')
+        btn.on('click', $.proxy(this.handleBtnClick, this))
+      },
+      handleBtnClick: function () {
+        var input = $('#input')
+        var inputValue = input.val()
+        var ulElem = $('#list')
+        ulElem.append('<li>' + inputValue + '</li>')
+        input.val('')
+      }
+    })
+
+    var page = new Page()
+    page.init()
+  </script>
+</body>
+
+</html>
